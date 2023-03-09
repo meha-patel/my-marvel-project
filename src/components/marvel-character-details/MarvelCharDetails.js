@@ -7,23 +7,16 @@ const MarvelCharDetails = () => {
   const [charDetails, setCharDetails] = useState({});
 
   useEffect(() => {
-    function fetchList() {
-      getCharById(params.charId).then((resp) => {
-        console.log("resp:", resp);
-        // dispatch({ type: "marvel-list", payload: { list: resp } });
-        setCharDetails(resp);
-      });
-    }
-    fetchList();
-    // setIsLoading(true);
-    // GetMarvelList().then((resp) => {
-    //   setMarvelList(resp);
-    //   setIsLoading(false);
-    // });
-  }, []);
+    getCharById(params.charId).then((resp) => {
+      setCharDetails(resp);
+    });
+  }, [params.charId]);
   return (
     <div>
       <h2>Marvel Character Details</h2>
+      <br />
+      <br />
+      <p>{charDetails}</p>
     </div>
   );
 };

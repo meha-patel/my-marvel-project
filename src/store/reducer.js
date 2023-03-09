@@ -1,10 +1,10 @@
 import { combineReducers } from "redux";
-import FavouriteReducer from "../components/favourite-chars-list/FavouriteReducer";
-import MarvelListReducer from "../components/marvel-characters-list/marvel-list-reducer";
+// import FavouriteReducer from "../components/favourite-chars-list/FavouriteReducer";
+import MarvelListReducer from "./reducers/marvel-reducer";
 
 const RootReducer = combineReducers({
   marvelList: MarvelListReducer,
-  favourite: FavouriteReducer,
+  // favourite: FavouriteReducer,
 });
 
 export default RootReducer;
