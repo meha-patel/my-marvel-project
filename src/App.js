@@ -1,9 +1,4 @@
-import {
-  createBrowserRouter,
-  // createRoutesFromElements,
-  // Route,
-  RouterProvider,
-} from "react-router-dom";
+import { createBrowserRouter, RouterProvider } from "react-router-dom";
 import classes from "./App.css";
 import RootLayout from "./pages/root";
 import MarvelCharList from "./components/marvel-characters-list/MarvelCharList";
@@ -32,7 +27,6 @@ const router = createBrowserRouter([
 function App() {
   return (
     <>
-      {/* <button onClick={updateTheme}>Update Theme</button> */}
       <h2 className={classes.h2}>Welcome to App page</h2>
       <RouterProvider router={router} />
     </>

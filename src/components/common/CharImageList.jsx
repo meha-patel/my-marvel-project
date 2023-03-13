@@ -25,11 +25,11 @@ import { useDispatch } from "react-redux";
 
 // export {ImageList, NameList};
 
-const CharImageList = ({ title, marvelList, isLoading }) => {
+const CharImageList = ({ title, list, isLoading }) => {
   const dispatch = useDispatch();
   const clickToFavorite = (id) => {
+    console.log("id:", id);
     dispatch(updateFavourite(id));
-    // dispatch({ type: "UPDATE_FAVOURITE", payload: { id: id } });
   };
   return (
     <div>
@@ -55,8 +55,8 @@ const CharImageList = ({ title, marvelList, isLoading }) => {
         >
           <ListSubheader component="div">{title}</ListSubheader>
         </ImageListItem>
-        {marvelList.length > 0 &&
-          marvelList.map((item) => (
+        {list.length > 0 &&
+          list.map((item) => (
             <ImageListItem
               key={item.thumbnail.path + item.id}
               style={{ marginBottom: "10px", marginLeft: "10px" }}

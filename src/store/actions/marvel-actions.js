@@ -8,9 +8,12 @@ const getMarvels = (resp) => ({
   payload: { list: resp },
 });
 
-const updateFavourite = (id) => ({
-  type: ACTIONS.UPDATE_FAVOURITE,
-  payload: { id: id },
-});
+const updateFavourite = (id) => {
+  console.log("id 2222:", id);
+  return {
+    type: ACTIONS.UPDATE_FAVOURITE,
+    payload: { id: id },
+  };
+};
 
 export { ACTIONS, getMarvels, updateFavourite };

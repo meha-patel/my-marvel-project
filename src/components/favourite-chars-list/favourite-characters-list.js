@@ -10,7 +10,7 @@ const FavCharsList = () => {
     <div>
       <CharImageList
         title={"Favourite Characters List"}
-        marvelList={favList}
+        list={favList}
         isLoading={false}
       />
     </div>

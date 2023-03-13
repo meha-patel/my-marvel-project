@@ -25,7 +25,7 @@ const MarvelCharList = () => {
     <div>
       <CharImageList
         title={"Marvel Characters List"}
-        marvelList={marverlistFromStore.marvelList}
+        list={marverlistFromStore.marvelList}
         isLoading={isLoading}
       />
     </div>

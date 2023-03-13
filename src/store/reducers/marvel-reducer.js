@@ -4,6 +4,9 @@ const initialState = { marvelList: [] };
 
 const MarvelListReducer = (state = initialState, action) => {
   const { payload, type } = action;
+  console.log("stateee:", state);
+  console.log("typeeee:", type);
+  console.log("payloaddd:", payload);
   switch (type) {
     case ACTIONS.GET_MARVEL_LIST: {
       return {
@@ -11,7 +14,7 @@ const MarvelListReducer = (state = initialState, action) => {
         marvelList: payload.list.map((e) => ({ ...e, isFavourite: false })),
       };
     }
-    case "UPDATE_FAVOURITE": {
+    case ACTIONS.UPDATE_FAVOURITE: {
       return {
         ...state,
         marvelList: state.marvelList.map((e) => ({
