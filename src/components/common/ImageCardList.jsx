@@ -7,11 +7,11 @@ import IconButton from "@mui/material/IconButton";
 import StarIcon from "@mui/icons-material/Star";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import { Link } from "react-router-dom";
-import { updateFavourite } from "../../store/actions/marvel-actions";
-import { useDispatch } from "react-redux";
+import {Link} from "react-router-dom";
+import {updateFavourite} from "../../store/actions/marvel-actions";
+import {useDispatch} from "react-redux";
 
-const CharImageList = ({ title, list, isLoading }) => {
+const ImageCardList = ({title, list, isLoading}) => {
   const dispatch = useDispatch();
   const clickToFavorite = (id) => {
     dispatch(updateFavourite(id));
@@ -27,7 +27,7 @@ const CharImageList = ({ title, list, isLoading }) => {
       >
         {isLoading && <CircularProgress />}
       </Box>
-      <ImageList sx={{ width: 500, height: 450, margin: "auto" }}>
+      <ImageList sx={{width: 500, height: 450, margin: "auto"}}>
         <ImageListItem
           key="Subheader"
           cols={2}
@@ -44,11 +44,11 @@ const CharImageList = ({ title, list, isLoading }) => {
           list.map((item) => (
             <ImageListItem
               key={item.thumbnail.path + item.id}
-              style={{ marginBottom: "10px", marginLeft: "10px" }}
+              style={{marginBottom: "10px", marginLeft: "10px"}}
             >
               <Link
                 to={`/marvel/characters/details/${item.id}`}
-                state={{ id: 1 }}
+                state={{id: 1}}
               >
                 <img
                   src={`${item.thumbnail.path}/portrait_incredible.jpg`}
@@ -61,7 +61,7 @@ const CharImageList = ({ title, list, isLoading }) => {
                 title={item.name}
                 actionIcon={
                   <IconButton
-                    sx={{ color: "rgba(255, 255, 255, 0.54)" }}
+                    sx={{color: "rgba(255, 255, 255, 0.54)"}}
                     aria-label={`info about ${item.name}`}
                     onClick={() => clickToFavorite(item.id)}
                   >
@@ -80,4 +80,4 @@ const CharImageList = ({ title, list, isLoading }) => {
   );
 };
 
-export default CharImageList;
+export default ImageCardList;

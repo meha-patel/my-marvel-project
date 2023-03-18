@@ -1,11 +1,11 @@
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
+import {createBrowserRouter, RouterProvider} from "react-router-dom";
 import classes from "./App.css";
 import RootLayout from "./pages/root";
-import MarvelCharList from "./components/marvel-characters-list/MarvelCharList";
-import MarvelCharDetails from "./components/marvel-character-details/MarvelCharDetails";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
-import FavCharsList from "./components/favourite-chars-list/favourite-characters-list";
+import MarvelCharacterList from "./pages/MarvelCharacterList";
+import FavouriteCharacterList from "./pages/FavouriteCharacterList";
+import MarvelCharacterDetails from "./pages/MarvelCharacterDetails";
 
 const router = createBrowserRouter([
   {
@@ -13,13 +13,13 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
-      { path: "/", element: <HomePage /> },
-      { path: "/marvel/characters/list", element: <MarvelCharList /> },
+      {path: "/", element: <HomePage />},
+      {path: "/marvel/characters/list", element: <MarvelCharacterList />},
       {
         path: "marvel/characters/details/:charId",
-        element: <MarvelCharDetails />,
+        element: <MarvelCharacterDetails />,
       },
-      { path: "marvel/fav/chars/list", element: <FavCharsList /> },
+      {path: "marvel/fav/chars/list", element: <FavouriteCharacterList />},
     ],
   },
 ]);

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { styled } from "@mui/material/styles";
+import {styled} from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -8,12 +8,12 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CharImageList from "./CharImageList";
+import CharImageList from "./ImageCardList";
 
 const ExpandMore = styled((props) => {
-  const { expand, ...other } = props;
+  const {expand, ...other} = props;
   return <IconButton {...other} />;
-})(({ theme, expand }) => ({
+})(({theme, expand}) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
@@ -21,19 +21,19 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const CharDescription = ({ charDesc }) => {
+const ExpandableDescriptionCard = ({charDesc}) => {
   const [expanded, setExpanded] = React.useState(false);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
   };
 
-  const { id, description, comics } = charDesc[0];
+  const {id, description, comics} = charDesc[0];
 
   return (
     <div>
       {charDesc && charDesc.length > 0 && (
-        <Card sx={{ maxWidth: 345, margin: "auto" }} key={id}>
+        <Card sx={{maxWidth: 345, margin: "auto"}} key={id}>
           <CardHeader title={id} />
           <CharImageList
             title={"Character Details"}
@@ -71,4 +71,4 @@ const CharDescription = ({ charDesc }) => {
   );
 };
 
-export default CharDescription;
+export default ExpandableDescriptionCard;
