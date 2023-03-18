@@ -4,9 +4,6 @@ const initialState = { marvelList: [] };
 
 const MarvelListReducer = (state = initialState, action) => {
   const { payload, type } = action;
-  console.log("stateee:", state);
-  console.log("typeeee:", type);
-  console.log("payloaddd:", payload);
   switch (type) {
     case ACTIONS.GET_MARVEL_LIST: {
       return {
