@@ -1,21 +1,15 @@
-import { useEffect, useState } from "react";
-import { json, useParams } from "react-router-dom";
-import { getCharById } from "../../api/marvel-api";
+// import { useEffect, useState } from "react";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router-dom";
 import CharDescription from "../common/CharDescription";
 
 const MarvelCharDetails = () => {
   const params = useParams();
-  const [charDetails, setCharDetails] = useState([]);
-  useEffect(() => {
-    getCharById(params.charId).then((resp) => {
-      let data = resp;
-      setCharDetails(data);
-    });
-  }, [params.charId]);
-  console.log("charDetails:", charDetails);
+  const characters = useSelector((state) => state?.marvelList);
+  let resp = characters.marvelList.filter((data) => parseInt(params.charId) === parseInt(data.id));
   return (
     <div>
-     <CharDescription charDesc={charDetails} />
+      <CharDescription charDesc={resp} />
     </div>
   );
 };

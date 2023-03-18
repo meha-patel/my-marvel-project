@@ -19,7 +19,7 @@ const MarvelCharList = () => {
         setIsLoading(false);
       });
     }
-  }, []);
+  }, [marverlistFromStore, dispatch]);
 
   return (
     <div>

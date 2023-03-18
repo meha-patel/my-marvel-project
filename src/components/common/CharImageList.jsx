@@ -11,24 +11,9 @@ import { Link } from "react-router-dom";
 import { updateFavourite } from "../../store/actions/marvel-actions";
 import { useDispatch } from "react-redux";
 
-// const ImageList = () => {
-//     return(
-//         <div>ImageList</div>
-//     );
-// }
-
-// const NameList = () => {
-//     return(
-//         <div>NameList</div>
-//     );
-// }
-
-// export {ImageList, NameList};
-
 const CharImageList = ({ title, list, isLoading }) => {
   const dispatch = useDispatch();
   const clickToFavorite = (id) => {
-    console.log("id:", id);
     dispatch(updateFavourite(id));
   };
   return (

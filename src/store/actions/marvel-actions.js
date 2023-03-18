@@ -9,7 +9,6 @@ const getMarvels = (resp) => ({
 });
 
 const updateFavourite = (id) => {
-  console.log("id 2222:", id);
   return {
     type: ACTIONS.UPDATE_FAVOURITE,
     payload: { id: id },
