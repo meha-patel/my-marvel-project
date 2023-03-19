@@ -8,7 +8,7 @@ import Collapse from "@mui/material/Collapse";
 import IconButton from "@mui/material/IconButton";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import CharImageList from "./ImageCardList";
+import ImageCardList from "./ImageCardList";
 
 const ExpandMore = styled((props) => {
   const {expand, ...other} = props;
@@ -35,7 +35,7 @@ const ExpandableDescriptionCard = ({charDesc}) => {
       {charDesc && charDesc.length > 0 && (
         <Card sx={{maxWidth: 345, margin: "auto"}} key={id}>
           <CardHeader title={id} />
-          <CharImageList
+          <ImageCardList
             title={"Character Details"}
             list={charDesc}
             isLoading={false}

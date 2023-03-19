@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {getList} from "../api/marvel-api";
 import {useDispatch, useSelector} from "react-redux";
 import {getMarvels} from "../store/actions/marvel-actions";
-import CharImageList from "../components/common/ImageCardList";
+import ImageCardList from "../components/common/ImageCardList";
 
 const MarvelCharacterList = () => {
   const [isLoading, setIsLoading] = useState(false);
@@ -23,7 +23,7 @@ const MarvelCharacterList = () => {
 
   return (
     <div>
-      <CharImageList
+      <ImageCardList
         title={"Marvel Characters List"}
         list={marverList.characterList}
         isLoading={isLoading}
