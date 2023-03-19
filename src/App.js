@@ -6,6 +6,8 @@ import HomePage from "./pages/Home";
 import MarvelCharacterList from "./pages/MarvelCharacterList";
 import FavouriteCharacterList from "./pages/FavouriteCharacterList";
 import MarvelCharacterDetails from "./pages/MarvelCharacterDetails";
+import {ThemeProvider, createTheme} from "@mui/material/styles";
+import CssBaseline from "@mui/material/CssBaseline";
 
 const router = createBrowserRouter([
   {
@@ -24,12 +26,17 @@ const router = createBrowserRouter([
   },
 ]);
 
+const darkTheme = createTheme({
+  palette: {
+    mode: "light",
+  },
+});
+
 function App() {
   return (
-    <>
-      <h2 className={classes.h2}>Welcome to App page</h2>
+    <ThemeProvider theme={darkTheme}>
       <RouterProvider router={router} />
-    </>
+    </ThemeProvider>
   );
 }
 
