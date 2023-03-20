@@ -1,7 +1,5 @@
 import {NavLink} from "react-router-dom";
 
-import classes from "./MainNavigation.module.css";
-
 import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
@@ -17,15 +15,28 @@ import Tooltip from "@mui/material/Tooltip";
 import MenuItem from "@mui/material/MenuItem";
 import AdbIcon from "@mui/icons-material/Adb";
 import {Link} from "react-router-dom";
+import {useTheme} from "@mui/material/styles";
+import Brightness4Icon from "@mui/icons-material/Brightness4";
+import Brightness7Icon from "@mui/icons-material/Brightness7";
+import {toggleTheme} from "../store/actions/theme-actions";
+import {useDispatch} from "react-redux";
 
 const pages = [
   {title: "Marvel Characters", link: "/marvel/characters/list"},
   {title: "Favourite Characters", link: "marvel/fav/chars/list"},
 ];
 const settings = ["Profile", "Account", "Dashboard", "Logout"];
-function Nav() {
+function MainNavigation() {
+  const dispatch = useDispatch();
+  const theme = useTheme();
+
   const [anchorElNav, setAnchorElNav] = React.useState(null);
   const [anchorElUser, setAnchorElUser] = React.useState(null);
+
+  const handleThemeChange = () => {
+    console.log("handleThemeChange");
+    dispatch(toggleTheme(theme.palette.mode === "dark" ? "light" : "dark"));
+  };
 
   const handleOpenNavMenu = (event) => {
     setAnchorElNav(event.currentTarget);
@@ -90,15 +101,31 @@ function Nav() {
               open={Boolean(anchorElNav)}
               onClose={handleCloseNavMenu}
               sx={{
-                display: {xs: "block", md: "none"},
+                display: {
+                  xs: "block",
+                  md: "none",
+                  display: "flex",
+                  justifyContent: "center",
+                },
               }}
             >
               {pages.map((page) => (
-                <NavLink>
-                  <MenuItem component={Link} href={page.link} key={page.title}>
-                    <Button textAlign="center">{page.title}</Button>
-                  </MenuItem>
-                </NavLink>
+                <MenuItem
+                  containerElement={
+                    <NavLink
+                      to={page.link}
+                      key={page}
+                      style={{textDecoration: "none", display: "block"}}
+                    >
+                      {page.title}
+                    </NavLink>
+                  }
+                  component={Link}
+                  href={page.link}
+                  key={page.title}
+                >
+                  <Button textAlign="center">{page.title}</Button>
+                </MenuItem>
               ))}
             </Menu>
           </Box>
@@ -119,12 +146,13 @@ function Nav() {
               textDecoration: "none",
             }}
           >
-            LOGO
+            MY MARVELS
           </Typography>
           <Box sx={{flexGrow: 1, display: {xs: "none", md: "flex"}}}>
             {pages.map((page) => (
               <NavLink
                 to={page.link}
+                key={page}
                 style={{textDecoration: "none", display: "block"}}
               >
                 <Button
@@ -135,6 +163,18 @@ function Nav() {
                 </Button>
               </NavLink>
             ))}
+          </Box>
+
+          <Box sx={{flexGrow: 0}}>
+            <Tooltip title="Theme">
+              <IconButton onClick={handleThemeChange} sx={{p: 0, mr: 4}}>
+                {theme.palette.mode === "dark" ? (
+                  <Brightness7Icon />
+                ) : (
+                  <Brightness4Icon />
+                )}
+              </IconButton>
+            </Tooltip>
           </Box>
 
           <Box sx={{flexGrow: 0}}>
@@ -171,45 +211,5 @@ function Nav() {
     </AppBar>
   );
 }
-function MainNavigation() {
-  return (
-    <header className={classes.header}>
-      <nav>
-        <ul className={classes.list}>
-          <li>
-            <NavLink
-              to="/"
-              className={({isActive}) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Home
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="/marvel/characters/list"
-              className={({isActive}) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Marvel Characters List
-            </NavLink>
-          </li>
-          <li>
-            <NavLink
-              to="marvel/fav/chars/list"
-              className={({isActive}) =>
-                isActive ? classes.active : undefined
-              }
-            >
-              Favourite Characters List
-            </NavLink>
-          </li>
-        </ul>
-      </nav>
-    </header>
-  );
-}
 
-export default Nav;
+export default MainNavigation;

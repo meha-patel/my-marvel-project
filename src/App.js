@@ -1,5 +1,4 @@
 import {createBrowserRouter, RouterProvider} from "react-router-dom";
-import classes from "./App.css";
 import RootLayout from "./pages/root";
 import ErrorPage from "./pages/Error";
 import HomePage from "./pages/Home";
@@ -7,6 +6,7 @@ import MarvelCharacterList from "./pages/MarvelCharacterList";
 import FavouriteCharacterList from "./pages/FavouriteCharacterList";
 import MarvelCharacterDetails from "./pages/MarvelCharacterDetails";
 import {ThemeProvider, createTheme} from "@mui/material/styles";
+import {useSelector} from "react-redux";
 import CssBaseline from "@mui/material/CssBaseline";
 
 const router = createBrowserRouter([
@@ -26,15 +26,18 @@ const router = createBrowserRouter([
   },
 ]);
 
-const darkTheme = createTheme({
-  palette: {
-    mode: "light",
-  },
-});
-
 function App() {
+  const activeTheme = useSelector((state) => state?.theme);
+
+  const darkTheme = createTheme({
+    palette: {
+      mode: activeTheme.theme,
+    },
+  });
+
   return (
     <ThemeProvider theme={darkTheme}>
+      <CssBaseline />
       <RouterProvider router={router} />
     </ThemeProvider>
   );

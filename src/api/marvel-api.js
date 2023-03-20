@@ -4,7 +4,7 @@ var hash = CryptoJS.MD5(keys.ts + keys.pvtkey + keys.pubkey);
 
 const getList = () => {
   return fetch(
-    `http://gateway.marvel.com/v1/public/characters?ts=${keys.ts}&apikey=${keys.pubkey}&hash=${hash}`
+    `http://gateway.marvel.com/v1/public/characters?ts=${keys.ts}&apikey=${keys.pubkey}&hash=${hash}&limit=100`
   )
     .then((response) => response.json())
     .then((data) => data.data.results);

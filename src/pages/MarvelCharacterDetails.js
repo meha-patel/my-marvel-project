@@ -5,12 +5,12 @@ import ExpandableDescriptionCard from "../components/common/ExpandableDescriptio
 const MarvelCharacterDetails = () => {
   const params = useParams();
   const characters = useSelector((state) => state?.marvels);
-  let resp = characters.characterList.filter(
+  let character = characters.characterList.filter(
     (data) => parseInt(params.charId) === parseInt(data.id)
-  );
+  )[0];
   return (
     <div>
-      <ExpandableDescriptionCard charDesc={resp} />
+      <ExpandableDescriptionCard character={character} />
     </div>
   );
 };
