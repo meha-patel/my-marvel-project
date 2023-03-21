@@ -60,7 +60,7 @@ function MainNavigation() {
     setAnchorElUser(null);
   };
 
-  const logoutHandler = (setting) => {
+  const settingHandler = (setting) => {
     if (setting === "Logout") {
       logout();
       navigate("/login");
@@ -217,7 +217,7 @@ function MainNavigation() {
                 <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
                   <Typography
                     textalign="center"
-                    onClick={() => logoutHandler(setting.name)}
+                    onClick={() => settingHandler(setting.name)}
                   >
                     {setting.name}
                   </Typography>
