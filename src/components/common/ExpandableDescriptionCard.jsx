@@ -94,7 +94,7 @@ const ExpandableDescriptionCard = ({character}) => {
               <CardContent>
                 <Typography paragraph>Comics:</Typography>
                 {comics.items.map((comic) => (
-                  <Typography paragraph>{comic.name}</Typography>
+                  <Typography paragraph key={comic.name}>{comic.name}</Typography>
                 ))}
               </CardContent>
             </Collapse>

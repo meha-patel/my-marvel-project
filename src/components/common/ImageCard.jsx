@@ -27,7 +27,7 @@ export default function ImageCard(props) {
         height="194"
         image={imagePath}
         alt="Marvel Image"
-        sx={{cursor: "pointer"}}
+        sx={{cursor: "pointer", height: '450px'}}
         onClick={() => handleClick(to)}
       />
       <CardActions

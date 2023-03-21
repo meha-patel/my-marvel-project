@@ -3,7 +3,6 @@ import {useEffect, useState} from "react";
 import {getList} from "../api/marvel-api";
 import {useDispatch, useSelector} from "react-redux";
 import {getMarvels} from "../store/actions/marvel-actions";
-import ImageCard from "../components/common/ImageCard";
 import ImageCardList from "../components/common/ImageCardList";
 
 const MarvelCharacterList = () => {
