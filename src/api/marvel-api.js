@@ -18,8 +18,4 @@ const getCharById = (charId) => {
     .then((data) => data.data.results);
 };
 
-export {
-  getList,
-  getCharById,
-  //   otherMethod,
-};
+export { getList, getCharById };

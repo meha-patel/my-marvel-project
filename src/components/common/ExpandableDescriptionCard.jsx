@@ -1,5 +1,5 @@
 import * as React from "react";
-import {styled} from "@mui/material/styles";
+import { styled } from "@mui/material/styles";
 import Card from "@mui/material/Card";
 import CardHeader from "@mui/material/CardHeader";
 import CardContent from "@mui/material/CardContent";
@@ -10,14 +10,14 @@ import CardMedia from "@mui/material/CardMedia";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import Typography from "@mui/material/Typography";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
-import {useDispatch} from "react-redux";
-import {updateFavourite} from "../../store/actions/marvel-actions";
-import {Box} from "@mui/system";
+import { useDispatch } from "react-redux";
+import { updateFavourite } from "../../store/actions/marvel-actions";
+import { Box } from "@mui/system";
 
 const ExpandMore = styled((props) => {
-  const {expand, ...other} = props;
+  const { expand, ...other } = props;
   return <IconButton {...other} />;
-})(({theme, expand}) => ({
+})(({ theme, expand }) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
   transition: theme.transitions.create("transform", {
@@ -25,7 +25,7 @@ const ExpandMore = styled((props) => {
   }),
 }));
 
-const ExpandableDescriptionCard = ({character}) => {
+const ExpandableDescriptionCard = ({ character }) => {
   const [expanded, setExpanded] = React.useState(true);
   const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ const ExpandableDescriptionCard = ({character}) => {
     dispatch(updateFavourite(id));
   };
 
-  const {id, name, comics, thumbnail, isFavourite} = character;
+  const { id, name, comics, thumbnail, isFavourite } = character;
 
   return (
     <div>
@@ -60,7 +60,7 @@ const ExpandableDescriptionCard = ({character}) => {
             }}
           >
             <CardHeader
-              sx={{maxWidth: 345, minWidth: 300, cursor: "pointer"}}
+              sx={{ maxWidth: 345, minWidth: 300, cursor: "pointer" }}
               title={name}
             />
             <CardMedia
@@ -68,11 +68,11 @@ const ExpandableDescriptionCard = ({character}) => {
               height="194"
               image={`${thumbnail.path}/portrait_incredible.jpg`}
               alt="Marvel Image"
-              sx={{cursor: "pointer"}}
+              sx={{ cursor: "pointer" }}
             />
             <CardActions
               disableSpacing
-              sx={{display: "flex", justifyContent: "flex-end"}}
+              sx={{ display: "flex", justifyContent: "flex-end" }}
             >
               <IconButton
                 color={isFavourite ? "primary" : "gray"}
@@ -94,7 +94,9 @@ const ExpandableDescriptionCard = ({character}) => {
               <CardContent>
                 <Typography paragraph>Comics:</Typography>
                 {comics.items.map((comic) => (
-                  <Typography paragraph key={comic.name}>{comic.name}</Typography>
+                  <Typography paragraph key={comic.name}>
+                    {comic.name}
+                  </Typography>
                 ))}
               </CardContent>
             </Collapse>

@@ -16,6 +16,7 @@ import {
   where,
   addDoc,
 } from "firebase/firestore";
+import { redirect } from "react-router-dom";
 const firebaseConfig = {
   apiKey: "AIzaSyAoCCv2JTjaO1NnfXf_0Fo_UycPPAeNSXw",
   authDomain: "marvel-authentication.firebaseapp.com",
@@ -76,13 +77,16 @@ const sendPasswordReset = async (email) => {
   try {
     await sendPasswordResetEmail(auth, email);
     alert("Password reset link sent!");
+    redirect("/login");
   } catch (err) {
     console.error(err);
     alert(err.message);
   }
 };
 const logout = () => {
-  signOut(auth).then(res=>console.log(res)).catch(err=>console.log(err));
+  signOut(auth)
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
 };
 export {
   auth,

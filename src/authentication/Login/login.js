@@ -17,7 +17,7 @@ import {
 import { useAuthState } from "react-firebase-hooks/auth";
 import { useNavigate } from "react-router-dom";
 
-function Login() {
+const Login = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = React.useState("");
   const [user, loading] = useAuthState(auth);
@@ -88,13 +88,17 @@ function Login() {
           </Button>
           <Grid container>
             <Grid item xs>
-              <Link to="/reset" variant="body2" sx={{ mr: "40px" }}>
+              <Link
+                href="/reset"
+                variant="body2"
+                sx={{ mr: "40px", cursor: "pointer" }}
+              >
                 Forgot password?
               </Link>
             </Grid>
             <Grid item>
               {"Don't have an account?"}
-              <Link to="/register" variant="body2">
+              <Link href="/register" variant="body2" sx={{ cursor: "pointer" }}>
                 {" Sign Up"}
               </Link>
             </Grid>
@@ -103,6 +107,6 @@ function Login() {
       </Box>
     </Container>
   );
-}
+};
 
 export default Login;

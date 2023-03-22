@@ -1,8 +1,20 @@
-import {useSelector} from "react-redux";
-import {useParams} from "react-router-dom";
+import { useEffect } from "react";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useSelector } from "react-redux";
+import { useNavigate, useParams } from "react-router-dom";
 import ExpandableDescriptionCard from "../components/common/ExpandableDescriptionCard";
+import { auth } from "../Firebase";
 
 const MarvelCharacterDetails = () => {
+  const [user, loading] = useAuthState(auth);
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    if (loading) {
+      return;
+    }
+    if (!user) navigate("/login");
+  }, [user, loading, navigate]);
   const params = useParams();
   const characters = useSelector((state) => state?.marvels);
   let character = characters.characterList.filter(

@@ -1,11 +1,11 @@
 import React from "react";
 import CircularProgress from "@mui/material/CircularProgress";
 import Box from "@mui/material/Box";
-import {updateFavourite} from "../../store/actions/marvel-actions";
-import {useDispatch} from "react-redux";
+import { updateFavourite } from "../../store/actions/marvel-actions";
+import { useDispatch } from "react-redux";
 import ImageCard from "./ImageCard";
 
-const ImageCardList = ({title, list, isLoading}) => {
+const ImageCardList = ({ title, list, isLoading }) => {
   const dispatch = useDispatch();
   const clickToFavorite = (id) => {
     dispatch(updateFavourite(id));

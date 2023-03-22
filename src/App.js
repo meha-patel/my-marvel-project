@@ -11,7 +11,6 @@ import CssBaseline from "@mui/material/CssBaseline";
 import Login from "./authentication/Login/login";
 import Register from "./authentication/Register/register";
 import Reset from "./authentication/Reset/reset";
-// import { CheckAuthLoader } from "./util/auth";
 
 const router = createBrowserRouter([
   {
@@ -19,27 +18,25 @@ const router = createBrowserRouter([
     element: <RootLayout />,
     errorElement: <ErrorPage />,
     children: [
+      { path: "/", element: <Login /> },
       { path: "/login", element: <Login /> },
       { path: "/register", element: <Register /> },
       { path: "/reset", element: <Reset /> },
-      { 
-        path: "/home", element: <HomePage />,
-        // loader: CheckAuthLoader 
+      {
+        path: "/home",
+        element: <HomePage />,
       },
       {
         path: "/marvel/characters/list",
         element: <MarvelCharacterList />,
-        // loader: CheckAuthLoader,
       },
       {
         path: "marvel/characters/details/:charId",
         element: <MarvelCharacterDetails />,
-        // loader: CheckAuthLoader,
       },
       {
         path: "marvel/fav/chars/list",
         element: <FavouriteCharacterList />,
-        // loader: CheckAuthLoader,
       },
     ],
   },

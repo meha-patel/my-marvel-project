@@ -1,17 +1,15 @@
-import { auth } from "../Firebase";
+import { useEffect } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { redirect } from "react-router-dom";
-import { useEffect } from "react";
+import { auth } from "../Firebase";
 
 export const CheckAuthLoader = () => {
   const [user] = useAuthState(auth);
 
   useEffect(() => {
-    console.log("user:", user);
     if (!user) {
       return redirect("/login");
     }
     return null;
   }, [user]);
 };
-

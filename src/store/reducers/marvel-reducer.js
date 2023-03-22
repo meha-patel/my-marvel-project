@@ -1,15 +1,14 @@
-import {ACTIONS} from "../actions/marvel-actions";
+import { ACTIONS } from "../actions/marvel-actions";
 
-const initialState = {characterList: []};
+const initialState = { characterList: [] };
 
 const MarvelListReducer = (state = initialState, action) => {
-  const {payload, type} = action;
-  console.log(payload);
+  const { payload, type } = action;
   switch (type) {
     case ACTIONS.GET_MARVEL_LIST: {
       return {
         ...state,
-        characterList: payload.list.map((e) => ({...e, isFavourite: false})),
+        characterList: payload.list.map((e) => ({ ...e, isFavourite: false })),
       };
     }
     case ACTIONS.UPDATE_FAVOURITE: {

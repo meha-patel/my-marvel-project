@@ -1,6 +1,5 @@
+import React, { useState } from "react";
 import { NavLink, useNavigate } from "react-router-dom";
-
-import * as React from "react";
 import AppBar from "@mui/material/AppBar";
 import Box from "@mui/material/Box";
 import Toolbar from "@mui/material/Toolbar";
@@ -20,28 +19,33 @@ import Brightness4Icon from "@mui/icons-material/Brightness4";
 import Brightness7Icon from "@mui/icons-material/Brightness7";
 import { toggleTheme } from "../store/actions/theme-actions";
 import { useDispatch } from "react-redux";
-import { logout } from "../Firebase";
+import { logout, auth } from "../Firebase";
+import { useAuthState } from "react-firebase-hooks/auth";
 
-const pages = [
-  { title: "Marvel Characters", link: "/marvel/characters/list" },
-  { title: "Favourite Characters", link: "marvel/fav/chars/list" },
-];
-const settings = [
-  { id: 1, name: "Home" },
-  { id: 2, name: "Marvel List" },
-  { id: 3, name: "Favourite Marvels" },
-  { id: 4, name: "Logout" },
-];
 function MainNavigation() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
+  const [user] = useAuthState(auth);
+  let pages = [];
+  let settings = [];
+  if (!user) {
+    settings = [
+      { id: 1, name: "Login" },
+      { id: 2, name: "Register" },
+    ];
+  } else {
+    settings = [{ id: 1, name: "Logout" }];
+    pages = [
+      { title: "Marvel Characters", link: "/marvel/characters/list" },
+      { title: "Favourite Characters", link: "marvel/fav/chars/list" },
+    ];
+  }
 
-  const [anchorElNav, setAnchorElNav] = React.useState(null);
-  const [anchorElUser, setAnchorElUser] = React.useState(null);
+  const [anchorElNav, setAnchorElNav] = useState(null);
+  const [anchorElUser, setAnchorElUser] = useState(null);
 
   const handleThemeChange = () => {
-    console.log("handleThemeChange");
     dispatch(toggleTheme(theme.palette.mode === "dark" ? "light" : "dark"));
   };
 
@@ -61,9 +65,14 @@ function MainNavigation() {
   };
 
   const settingHandler = (setting) => {
+    handleCloseUserMenu();
     if (setting === "Logout") {
       logout();
       navigate("/login");
+    } else if (setting === "Login") {
+      navigate("/login");
+    } else if (setting === "Register") {
+      navigate("/register");
     }
   };
 
@@ -75,7 +84,7 @@ function MainNavigation() {
             variant="h6"
             noWrap
             component="a"
-            href="/"
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: "none", md: "flex" },
@@ -86,7 +95,7 @@ function MainNavigation() {
               textDecoration: "none",
             }}
           >
-            MY MARVELS
+            MY MARVElS
           </Typography>
 
           <Box sx={{ flexGrow: 1, display: { xs: "flex", md: "none" } }}>
@@ -123,24 +132,25 @@ function MainNavigation() {
                 },
               }}
             >
-              {pages.map((page) => (
-                <MenuItem
-                  containerelement={
-                    <NavLink
-                      to={page.link}
-                      key={page.title}
-                      style={{ textDecoration: "none", display: "block" }}
-                    >
-                      {page.title}
-                    </NavLink>
-                  }
-                  component={Link}
-                  href={page.link}
-                  key={page.title}
-                >
-                  <Button textalign="center">{page.title}</Button>
-                </MenuItem>
-              ))}
+              {pages &&
+                pages.map((page) => (
+                  <MenuItem
+                    containerelement={
+                      <NavLink
+                        to={page.link}
+                        key={page.title}
+                        style={{ textDecoration: "none", display: "block" }}
+                      >
+                        {page.title}
+                      </NavLink>
+                    }
+                    component={Link}
+                    href={page.link}
+                    key={page.title}
+                  >
+                    <Button textalign="center">{page.title}</Button>
+                  </MenuItem>
+                ))}
             </Menu>
           </Box>
           <AdbIcon sx={{ display: { xs: "flex", md: "none" }, mr: 1 }} />
@@ -148,7 +158,7 @@ function MainNavigation() {
             variant="h5"
             noWrap
             component="a"
-            href=""
+            href="/home"
             sx={{
               mr: 2,
               display: { xs: "flex", md: "none" },
@@ -194,7 +204,7 @@ function MainNavigation() {
           <Box sx={{ flexGrow: 0 }}>
             <Tooltip title="Open settings">
               <IconButton onClick={handleOpenUserMenu} sx={{ p: 0 }}>
-                <Avatar alt="Remy Sharp" src="/static/images/avatar/2.jpg" />
+                <Avatar>{user && user.displayName[0]}</Avatar>
               </IconButton>
             </Tooltip>
             <Menu
@@ -214,13 +224,13 @@ function MainNavigation() {
               onClose={handleCloseUserMenu}
             >
               {settings.map((setting) => (
-                <MenuItem key={setting.id} onClick={handleCloseUserMenu}>
-                  <Typography
-                    textalign="center"
-                    onClick={() => settingHandler(setting.name)}
-                  >
-                    {setting.name}
-                  </Typography>
+                <MenuItem
+                  key={setting.id}
+                  onClick={() => {
+                    settingHandler(setting.name);
+                  }}
+                >
+                  <Typography textalign="center">{setting.name}</Typography>
                 </MenuItem>
               ))}
             </Menu>
